@@ -17,13 +17,14 @@
     	for($i=0;$i<=count($tmpname)-1;$i++){
     		$name=addslashes($filename[$i]);
     		$tmp=addslashes(file_get_contents($tmpname[$i]));
-            if(empty($name){
+            if(empty($name)){
               echo "No file added";
             }
             else{
             mysqli_query($db,"INSERT INTO img(name,image) VALUES('$name','$tmp')");
     	} 	
     }
+}
     $res=mysqli_query($db,"SELECT * from img");
     while($row = mysqli_fetch_array($res)){
      echo '<img src="data:image/jpeg;base64,'.base64_encode($row['image']).'"width="250" height="250">';

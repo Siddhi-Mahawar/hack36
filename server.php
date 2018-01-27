@@ -4,7 +4,7 @@
    $username="";
    $email="";
    $errors=array();
-
+    $name="";
    $db=mysqli_connect('localhost','root','','registration');
    $password_1="";
    $password_2="";
@@ -29,8 +29,8 @@
    }
    if(count($errors)==0){
    	$password=md5($password_1);
-   	$sql="INSERT INTO users(username,email,password) VALUES('$username','$email','$password')";
-   	mysqli_query($db,$sql);
+      $sql="INSERT INTO users(username,email,password) VALUES('$username','$email','$password')";
+      mysqli_query($db,$sql);
    	$_SESSION['username']=$username;
    	$_SESSION['success']="You Are now logged in";
    	header('location:index.php');
@@ -45,7 +45,7 @@
       array_push($errors,"Username is required");
    }
    if(empty($password)){
-      array_push($errors,"Password is required");
+     array_push($errors,"Password is required");
    }
    if(count($errors) == 0){
       $password = md5($password);
@@ -54,7 +54,7 @@
       if(mysqli_num_rows($result)==1){
          $_SESSION['username'] = $username;
          $_SESSION['success']="you are now logged in";
-         header('location:index.php');
+         header('location:panel1.php');
       }
       else{
          array_push($errors,"wrong username/password combination");
@@ -68,4 +68,17 @@
       unset($_SESSION['username']);
       header('location:login.php');
    }
+  
+   if(isset($_POST['post'])){
+      $name=$_POST['name'];
+      if(empty($name)){
+         echo "Enter your comment";
+      }
+      if(count($errors)==0){
+         $sql="INSERT INTO qwery(query) VALUES('$name')";
+            mysqli_query($db,$sql);
+            header('location:queries.php');
+            
+}
+}
 ?>

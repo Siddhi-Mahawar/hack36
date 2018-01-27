@@ -4,6 +4,9 @@
 	<title> display pdf</title>
 </head>
 	<body>
+		<div class="header">
+		<h2> Home page</h2>
+	</div>
 		<?php 
 		$file= 'bcd.pdf';
 		$filename='bcd.pdf';
